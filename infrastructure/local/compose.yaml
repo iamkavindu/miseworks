@@ -1,0 +1,26 @@
+name: miseworks-local
+services:
+  floci:
+    image: floci/floci:2.3.0
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      FLOCI_BASE_URL: http://localhost:4566
+      FLOCI_DEFAULT_REGION: us-east-1
+    volumes:
+      - floci-data:/app/data
+  valkey:
+    image: valkey/valkey:8.1.3-alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+    command: ["valkey-server", "--appendonly", "yes"]
+    volumes:
+      - valkey-data:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+volumes:
+  floci-data:
+  valkey-data:
