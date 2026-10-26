@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: reservations-service
+  # Supply SPRING_DATASOURCE_URL, SPRING_DATASOURCE_USERNAME and
+  # SPRING_DATASOURCE_PASSWORD externally. Tests use @ServiceConnection.
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${COGNITO_ISSUER_URI}
+# Cognito-specific token-use/client checks and role mapping remain to be
+# configured and verified during the authentication phase.
