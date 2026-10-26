@@ -1,0 +1,14 @@
+# Run from apps/staff-bff after infrastructure/local/bootstrap.py.
+spring:
+  config:
+    import: "file:../../infrastructure/local/.env[.properties]"
+  data:
+    redis:
+      host: localhost
+server:
+  address: 127.0.0.1
+  servlet:
+    session:
+      cookie:
+        # Only the explicit local profile permits HTTP cookies.
+        secure: false
